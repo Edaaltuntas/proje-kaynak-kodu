@@ -1,0 +1,509 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h> //rand() rand fonksiyonun gorevini dogru sekilde yapması icin gerekli kutuphane tanimlamasi
+
+int fonkitonki(int *hucre){ //ic kisimdaki hucreler icin canli komsu sayisinin hesaplanmasi
+
+    int canli=0;
+
+    int *i=(hucre-9);
+
+    for(int a=0;a<3;a++){
+
+        if(*i==1){
+
+            canli++;
+
+        }
+
+            i++;
+
+    }
+
+    i=(hucre+7);
+
+    for(int a=0;a<3;a++){
+
+        if(*i==1){
+
+            canli++;
+
+        }
+
+            i++;
+
+    }
+
+    i=(hucre-1);
+
+    for(int a=0;a<2;a++){
+
+        if(*i==1){
+
+            canli++;
+
+        }
+
+            i+=2;
+
+        }
+
+return canli;
+
+}
+
+int sol_kenar(int *hucre){  //sol kenardaki hucreler icin canli komsu sayisinin hesaplanmasi (koseler haric)
+
+
+
+    int canli=0;
+
+    int *i=(hucre-8);
+
+    for(int a=0;a<2;a++){
+
+        if(*i==1){
+
+            canli++;
+
+        }
+
+        i++;
+
+    }
+
+    i=(hucre+8);
+
+    for(int a=0;a<2;a++){
+
+        if(*i==1){
+
+            canli++;
+
+        }
+
+        i++;
+
+    }
+
+    i=(hucre+1);
+
+    if(*i==1){
+
+        canli++;
+
+    }
+
+
+
+return canli;
+
+}
+
+int sag_kenar(int *hucre){  //sag kenardaki hucreler icin canli komsu sayisinin hesaplanmasi (koseler haric)
+
+    int canli=0;
+
+    int *i=(hucre-9);
+
+    for(int a=0;a<2;a++){
+
+        if(*i==1){
+
+            canli++;
+
+        }
+
+        i++;
+
+    }
+
+    i=(hucre+7);
+
+    for(int a=0;a<2;a++){
+
+        if(*i==1){
+
+            canli++;
+
+        }
+
+        i++;
+
+    }
+
+    i=(hucre-1);
+
+    if(*i==1){
+
+        canli++;
+
+    }
+
+    return canli;
+
+}
+
+int ust_kenar(int *hucre){  //ust kenardaki hucreler icin canli komsu sayisinin hesaplanmasi (koseler haric)
+
+    int canli=0;
+
+    int *i=hucre-1;
+
+    for(int a=0;a<2;a++){
+
+        if(*i==1){
+
+            canli++;
+
+        }
+
+        i+=2;
+
+    }
+
+    i=(hucre+7);
+
+    for(int a=0;a<3;a++){
+
+        if(*i==1){
+
+            canli++;
+
+        }
+
+        i++;
+
+    }
+
+    return canli;
+
+}
+
+int alt_kenar(int *hucre){  //alt kenardaki hucreler icin canli komsu sayisinin hesaplanmasi (koseler haric)
+
+    int canli=0;
+
+    int *i=(hucre-9);
+
+    for(int a=0;a<3;a++){
+
+        if(*i==1){
+
+            canli++;
+
+        }
+
+        i++;
+
+    }
+
+    i=(hucre-1);
+
+    for(int a=0;a<2;a++){
+
+        if(*i==1){
+
+            canli++;
+
+        }
+
+        i+=2;
+
+    }
+
+    return canli;
+
+}
+
+int sol_ust(int *hucre){ //sol ust kosedeki hucre icin canli komsu sayisinin hesaplanmasi
+
+
+
+    int canli=0;
+
+    int *i=hucre+1;
+
+    if(*i==1){
+
+        canli++;
+
+    }
+
+    i=hucre+8;
+
+    for(int a=0;a<2;a++,i++){
+
+        if(*i==1){
+
+        canli++;
+
+        }
+
+    }
+
+    return canli;
+
+}
+
+int sol_alt(int *hucre){ //sol alt kosedeki hucre icin canli komsu sayisinin hesaplanmasi
+
+    int canli=0;
+
+    int *i=hucre+1;
+
+    if(*i==1){
+
+        canli++;
+
+    }
+
+    i=hucre-8;
+
+      for(int a=0;a<2;a++){
+
+        if(*i==1){
+
+        canli++;
+
+        }
+
+        i++;
+
+      }
+
+    return canli;
+
+}
+
+int sag_ust(int *hucre){ //sag ust kosedeki hucre icin canli komsu sayisinin hesaplanmasi
+
+    int canli=0;
+
+    int *i=hucre-1;
+
+    if(*i){
+
+        canli++;
+
+    }
+
+    i=hucre+7;
+
+        for(int a=0;a<2;a++){
+
+        if(*i==1){
+
+        canli++;
+
+        }
+
+        i++;
+
+    }
+
+    return canli;
+
+}
+
+int sag_alt(int *hucre){ //sag alt kosedeki hucre icin canli komsu sayisinin hesaplanmasi
+
+    int canli=0;
+
+    int *i=hucre-1;
+
+    if(*i==1){
+
+        canli++;
+
+    }
+
+    i=hucre-9;
+
+   for(int a=0;a<2;a++){
+
+        if(*i==1){
+
+        canli++;
+
+        }
+
+        i++;
+
+    }
+
+
+
+    return canli;
+
+}
+
+void ekrana_bastirma(int dizi[][8],int jenerasyon){ //cikti verme
+    for(int i=0;i<8;i++){ //ekrana bastirma
+
+        for(int a=0;a<8;a++){
+
+                printf("|");
+
+            if(dizi[i][a]==1)
+
+               printf("*");
+
+            else
+
+                printf(" ");
+
+
+
+        }
+
+        printf("|");
+
+        printf("\n");
+
+    }
+    printf("\n%d.jenerasyon",jenerasyon);
+    printf("\n\n\n");
+
+}
+
+void baslangic(int dizi[][8]){  //baslangic canli hücrelerin belirlenmesi
+    srand ( time(0) );
+    for(int i=0;i<8;i++){
+        for(int a=0;a<8;a++){
+         dizi[i][a]=(rand() % 2);
+        }
+    }
+    printf("\n");
+
+}
+
+int canli_sayisi_hesaplama(int dizi[][8]){ //oyunda kac canli hucre var
+            int canli_sayisi=0;
+        for(int i=0;i<8;i++){
+            for(int a=0;a<8;a++){
+
+            if(dizi[i][a]==1)
+
+                canli_sayisi++;
+
+            }
+
+        }
+        return canli_sayisi;
+}
+
+int main(){
+
+   int tutucu[8][8]; //hucrenin canli komsularini tutan dizi
+
+   int game_area[8][8]; // ekranda görülecek olan canli hücrelerin tutuldugu dizi
+
+   int canli_sayisi=0; // canli sayisini tutan degisken
+
+   int o=1; //jenerasyon takibi değişkeninin tanimi
+
+    baslangic(game_area); // canli hucrelerin rastgele belirlenmesi
+
+    canli_sayisi=canli_sayisi_hesaplama(game_area); // canli hucre sayisinin belirlenmesi
+
+    ekrana_bastirma(game_area,o); // oyunun baslangic halinin ekrana basilmasi
+
+    o=0; //jenerasyon takibi değişkeninin döngü öncesi doğru değere getirilmesi için
+
+
+    while(canli_sayisi_hesaplama(game_area) != 0){ // oyunun ana dongusu
+
+            if(o>28)  //oyunun bitebilmesi icin jenerasyon siniri
+                break;
+
+   for(int i=0;i<8;i++){ //kordinat belirleme
+
+    for(int a=0;a<8;a++){
+
+                 if((i==0) && (a==0))
+
+            tutucu[i][a]=sol_ust(&game_area[0][0]);
+
+            else if((i==0) && (a==7))
+
+            tutucu[i][a]=sag_ust(&game_area[0][7]);
+
+            else if((i==7) && (a==0))
+
+            tutucu[i][a]=sol_alt(&game_area[7][0]);
+
+            else if((i==7) && (a==7))
+
+            tutucu[i][a]=sag_alt(&game_area[7][7]);
+
+            else if(a==0 && (i>0 && i<7))
+
+            tutucu[i][a]=sol_kenar(&game_area[i][a]);
+
+            else if(a==7 && (i>0 && i<7))
+
+            tutucu[i][a]=sag_kenar(&game_area[i][a]);
+
+            else if(i==0 && (a>0 && a<7))
+
+            tutucu[i][a]=ust_kenar(&game_area[i][a]);
+
+            else if(i==7 && (a>0 && a<7))
+
+            tutucu[i][a]=alt_kenar(&game_area[i][a]);
+
+            else
+
+            tutucu[i][a]=fonkitonki(&game_area[i][a]);
+
+       }
+
+}
+
+        for(int i=0;i<8;i++){ //yasama sartlari
+
+    for(int a=0;a<8;a++){
+
+         if(tutucu[i][a]<2)
+
+            game_area[i][a]=0;
+
+         else if(tutucu[i][a]==2 && game_area[i][a]==1)
+
+            ;
+
+         else if(tutucu[i][a]==2 && game_area[i][a]==0)
+
+            ;
+
+         else if(tutucu[i][a]==3)
+
+            game_area[i][a]=1;
+
+         else if(tutucu[i][a]>3)
+
+            game_area[i][a]=0;
+
+        }
+
+    }
+
+  ekrana_bastirma(game_area,o+2); //her jenerasyonun ekranda gosterilmesi
+
+            o++; //jenerasyon takibi icin degiskenin degerinin degistirilmesi
+    }
+
+    if(canli_sayisi_hesaplama(game_area)==0)
+
+        printf("\nhic canli hucre kalmadi \n\noyun kaybedildi\n\n");
+
+    else
+
+        printf("%d tane canli hucre kaldi \n\noyun kazanildi\n\n",canli_sayisi_hesaplama(game_area));
+
+        getchar();
+
+    return 0;
+
+}
